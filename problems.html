@@ -22,7 +22,9 @@
                 var input = BigInt(document.getElementById("answer").value);
                 var correct = 280166482n;
                 if ((input * input) % 1000000009n === correct) {
-                    document.getElementById("feedback").textContent = "55796903368 is correct!";
+                    document.getElementById("feedback").textContent = toString(input) + " is correct!";
+                } else {
+                    document.getElementById("feedback").textContent = "Incorrect :(";
                 }
             } catch (e) {
             }
