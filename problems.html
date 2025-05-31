@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang = en>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="images/sqrt73.png">
+        <title> sqrt73 problems </title>
+        <style></style>
+    </head>
+    <body>
+        <p><a href="index.html"> back </a></p>
+        <h2>This will become something more, but here's a fun  coding problem</h2>
+        <p>How many numbers from 1 to 10<sup>37</sup> that contain the substring "73" are actually divisible by 73?</p>
+        <p>Give the last 9 digits of the answer</p>
+        <input type="text" id="answer">
+        <button onclick="check()">Check Answer</button>
+        <p id="feedback"></p>
+        <script src="trail.js"></script>
+        <script>
+            function check() {
+                try {
+                var input = BigInt(document.getElementById("answer").value);
+                var correct = 280166482n;
+                if ((input * input) % 1000000009n === correct) {
+                    document.getElementById("feedback").textContent = "55796903368 is correct!";
+                }
+            } catch (e) {
+            }
+            }
+        </script>
+    </body>
+</html>
