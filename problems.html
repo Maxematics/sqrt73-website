@@ -13,16 +13,22 @@
         <p>How many numbers from 1 to 10<sup>37</sup> that contain the substring "73" are actually divisible by 73?</p>
         <p>Give the last 9 digits of the answer</p>
         <input type="text" id="answer">
-        <button onclick="check()">Check Answer</button>
+        <button onclick="check()" id = "coolBtn">Check Answer</button>
         <p id="feedback"></p>
         <script src="trail.js"></script>
         <script>
+            document.getElementById("answer").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    document.getElementById("coolBtn").click();
+                }
+                });
             function check() {
                 try {
                 var input = BigInt(document.getElementById("answer").value);
                 var correct = 280166482n;
                 if ((input * input) % 1000000009n === correct) {
-                    document.getElementById("feedback").textContent = toString(input) + " is correct!";
+                    document.getElementById("feedback").textContent = input.toString() + " is correct!";
                 } else {
                     document.getElementById("feedback").textContent = "Incorrect :(";
                 }
