@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang = en>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="images/sqrt73.png">
+        <title> sqrt73 Hi-Lo </title>
+        <style></style>
+    </head>
+    <body>
+        <p><a href="index.html"> back </a></p><br>
+        <h2 style="text-align: center;">Hi-Lo Challenge</h2>
+        <p style="text-align: center;"> Rules: </p>
+        <p style="text-align: center;">The computer has generated a number from 1 to 1,000,000,000. You have 60 seconds to find it</p>
+        <p style="text-align: center;">You will be told if your guess is too high or too low.</p>
+        <h3 style="text-align: center;"> Good luck!</h3>
+        <input type="text" id="answer">
+        <button onclick="check()" id = "coolBtn">Check Answer</button>
+        <p id="feedback"></p>
+        <p id="countdown"></p>
+        <h2 style="color : red" id="change"></h2>
+        <script src="trail.js"></script>
+        <script>
+            let timeleft = 60;
+            var keepgoing = true;
+            function time() {
+            document.getElementById("countdown").textContent = timeleft.toString() + " seconds left";
+            const interv = setInterval(() => {
+                if (timeleft <= 0 && keepgoing) {
+                    timeleft = 60;
+                    document.getElementById("change").textContent = "Number has reset, answer was " + correct.toString();
+                    correct = getRandomInt(1, 1000000000);
+                }
+                else if (timeleft === 55 && keepgoing) {
+                    document.getElementById("change").textContent = "";
+                    document.getElementById("countdown").textContent = timeleft.toString() + " seconds left";
+                    timeleft--;
+                }
+                else if (keepgoing) { timeleft--; 
+                    document.getElementById("countdown").textContent = timeleft.toString() + " seconds left";
+                }
+
+            }, 1000) }
+
+            if (timeleft > 0) time();
+            document.getElementById("answer").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    document.getElementById("coolBtn").click();
+                }
+                });
+            function getRandomInt(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            var correct = getRandomInt(1, 1000000000);
+            function check() {
+                if (!keepgoing) return;
+                try {
+                var input = parseInt(document.getElementById("answer").value);
+                if (input === correct) {
+                    document.getElementById("feedback").textContent = input.toString() + " is correct!";
+                    keepgoing = false;
+                    document.getElementById("countdown").textContent = "";
+                    document.getElementById("change").style.color = "green";
+                    document.getElementById("change").textContent = "You Win!";
+                } else if (isNaN(input)) {
+                   document.getElementById("feedback").textContent = "That isn't a number!";
+                } else if (input < correct) {
+                    document.getElementById("feedback").textContent = input.toString() + " is too small!";
+                } else {
+                    document.getElementById("feedback").textContent = input.toString() + " is too large!";
+                }
+            } catch (e) {
+                "That isn't a number!";
+            }
+            }
+        </script>
+    </body>
+</html>
